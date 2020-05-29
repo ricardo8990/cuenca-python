@@ -10,11 +10,15 @@ from .resources import retrieve_uri
 class Deposit(Transaction, Cacheable):
     _resource: ClassVar = 'deposits'
 
-    source_uri: str
     network: DepositNetwork
+    source_uri: Optional[str]
     tracking_key: Optional[str]  # clave rastreo if network is SPEI
 
     @property  # type: ignore
     @lru_cache()
-    def source(self) -> Account:
-        return cast(Account, retrieve_uri(self.source_uri))
+    def source(self) -> Optional[Account]:
+        if self.source_uri is None:  # cash deposit
+            acct = None
+        else:
+            acct = cast(Account, retrieve_uri(self.source_uri))
+        return acct
