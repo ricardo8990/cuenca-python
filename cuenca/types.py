@@ -10,7 +10,7 @@ class CardNetwork(str, Enum):
 class CardTransactionType(str, Enum):
     auth = 'auth'
     capture = 'capture'
-    expired = 'expired'
+    expiration = 'expiration'
     refund = 'refund'
     void = 'void'
 
