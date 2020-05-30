@@ -21,6 +21,7 @@ from .resources import RESOURCES
 from .transfers import Transfer
 from .whatsapp_transfers import WhatsappTransfer
 
+# avoid circular imports
 resource_classes = [
     ApiKey,
     Account,
